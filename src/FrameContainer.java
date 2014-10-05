@@ -29,12 +29,10 @@ public class FrameContainer extends JFrame {
         tempChart.validate();
 
         setLayout(new BorderLayout());
-        add(tempChart, BorderLayout.CENTER);
+        add(tempChart, BorderLayout.NORTH);
         add(sidePanel, BorderLayout.SOUTH);
-        //setSize(tempChart.getWidth(),tempChart.getHeight());
+        pack();
 
-
-        // Add action listeners here
         sidePanel.inZoomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +56,9 @@ public class FrameContainer extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sidePanel.bContinuous = !sidePanel.bContinuous;
+
+                // Testing error mode
+                tempChart.modeError = !tempChart.modeError;
                 printGraphType();
             }
         });
@@ -68,6 +69,9 @@ public class FrameContainer extends JFrame {
             sidePanel.temperatureLabel.setText(Double.toString(incomingVal)+"°C");
         else
             sidePanel.temperatureLabel.setText(Double.toString((incomingVal*9.0 / 5.0) +32.0) + " °F");
+
+        if(tempChart.modeError)
+            sidePanel.temperatureLabel.setText("Error!");
 
     }
 

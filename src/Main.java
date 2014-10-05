@@ -19,12 +19,12 @@ public class Main {
     public static void main(String [] Args)
     {
         int loopCount = 10;
-        serialCommunicator = new SerialCommunicator();
+        //serialCommunicator = new SerialCommunicator();
 
         FrameContainer frameContainer = new FrameContainer();
         frameContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameContainer.setSize(700, 550);
-        frameContainer.setMinimumSize(new Dimension(700,550));
+        frameContainer.setSize(720, 520);
+        frameContainer.setMinimumSize(new Dimension(720,520));
         frameContainer.setLocation(200, 100);
         frameContainer.setVisible(true);
         serialCommunicator.getArduinoTemperature();

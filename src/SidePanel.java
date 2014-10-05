@@ -16,20 +16,25 @@ public class SidePanel extends JPanel {
 
 
     public SidePanel(){
-        setLayout(new GridLayout(0, 1, 30, 30));
-        ButtonGroup buttonGroup = new ButtonGroup();
+        setLayout(new GridLayout(1, 1, 30, 30));
 
         inZoomButton = new JButton("Zoom +");
+        inZoomButton.setFont(new Font("Dialog", Font.PLAIN, 20));
         outZoomButton = new JButton("Zoom -");
+        outZoomButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 
         tempButton = new JButton("°C/°F");
+        tempButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 
         String unitVar = "°C";
         temperatureLabel = new JLabel(Double.toString(Main.incomingVal) + unitVar);
-        //temperatureLabel.setSize(20,20); TODO: Possibly adjust incomingVal size
+        temperatureLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
         graphTypeButton = new JButton("Continuous/Not");
+        graphTypeButton.setFont(new Font("Dialog", Font.PLAIN, 20));
         String varString = "Continuous";
         graphTypeLabel = new JLabel(varString);
+        graphTypeLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+        graphTypeButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 
         JPanel zoomPanel = new JPanel();
         zoomPanel.add(inZoomButton);

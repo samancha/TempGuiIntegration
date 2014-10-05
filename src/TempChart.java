@@ -23,6 +23,7 @@ public class TempChart extends JPanel{
     private Double [] temperaturesArray = new Double[300];
 
     boolean mode60= true;
+    boolean modeError = false;
 
 
     public TempChart(){
@@ -44,12 +45,17 @@ public class TempChart extends JPanel{
         plot.getDomainAxis().setInverted(true);
         plot.getDomainAxis().setLabelFont(axisTitlesFont);
         plot.getDomainAxis().setTickLabelFont(axisNumFont);
+        plot.getDomainAxis().setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        plot.getRenderer().setSeriesPaint(0, Color.blue);
+
         if(mode60)
             plot.getDomainAxis().setRange(0,60);
         else
             plot.getDomainAxis().setRange(0,300);
-        plot.getDomainAxis().setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
+        if (modeError) {
+            plot.getRenderer().setSeriesPaint(0, Color.red);
+        }
 
         NumberAxis yAxis = (NumberAxis)plot.getRangeAxis();
         yAxis.setLabelFont(axisTitlesFont);
@@ -66,13 +72,33 @@ public class TempChart extends JPanel{
 
         // Todo: make if statement saying if 60
 
-        for(int i= temperaturesArray.length - 1; i >= 0 ; i--){
-            if(i != 0){
-                temperaturesArray[i] = temperaturesArray[i-1];
-            }else if (i == 0){
-                temperaturesArray[i] = newTempVal;
+        for (int i = temperaturesArray.length - 1; i >= 0; i--) {
+            if (i != 0) {
+
+                if(modeError && i ==1){
+                    temperaturesArray[i] =48.0;
+                    temperaturesArray[i-1] = 12.0;
+                    xyData.add(i, temperaturesArray[i]);
+                    xyData.add(i-1,temperaturesArray[i-1]);
+                }else if(!modeError){
+                    temperaturesArray[i] = temperaturesArray[i - 1];
+                    xyData.add(i, temperaturesArray[i]);
+                }
+
             }
-            xyData.add(i,temperaturesArray[i]);
+            else if (i ==  0) {
+                /*
+                if(modeError){
+                    temperaturesArray[i] = 48.0;
+                    temperaturesArray[i+1] = 12.0;
+                    xyData.add(i, temperaturesArray[i]);
+                    xyData.add(i+1,temperaturesArray[i+1]);
+
+                }*/
+                temperaturesArray[i] = newTempVal;
+                xyData.add(i, temperaturesArray[i]);
+            }
+
         }
 
         dataCollection = new XYSeriesCollection(xyData);
