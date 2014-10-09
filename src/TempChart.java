@@ -11,6 +11,7 @@ import java.awt.*;
 
 /**
  * Created by Steve on 9/21/2014.
+ *
  */
 
 public class TempChart extends JPanel{
