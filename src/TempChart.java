@@ -28,7 +28,6 @@ public class TempChart extends JPanel{
 
 
     public TempChart(){
-        System.out.println("In Constructor!");
         chart = createGraph();
         chartPanel = new ChartPanel(chart);
         add(chartPanel);
