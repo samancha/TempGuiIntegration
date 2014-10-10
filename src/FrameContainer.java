@@ -28,8 +28,12 @@ public class FrameContainer extends JFrame {
         tempChart = new TempChart();
         tempChart.validate();
 
+        //setLayout(new FlowLayout());
+        //add(tempChart);
+        //add(sidePanel);
+
         setLayout(new BorderLayout());
-        add(tempChart, BorderLayout.NORTH);
+        add(tempChart, BorderLayout.CENTER);
         add(sidePanel, BorderLayout.SOUTH);
         pack();
 
@@ -49,6 +53,9 @@ public class FrameContainer extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sidePanel.inCelcius = !sidePanel.inCelcius;
+
+                // Testing error mode
+                SerialCommunicator.thirdBoxError = !SerialCommunicator.thirdBoxError;
                 printTemperature();
             }
         });
@@ -59,6 +66,7 @@ public class FrameContainer extends JFrame {
 
                 // Testing error mode
                 tempChart.modeError = !tempChart.modeError;
+                SerialCommunicator.unpluggedError = !SerialCommunicator.unpluggedError;
                 printGraphType();
             }
         });

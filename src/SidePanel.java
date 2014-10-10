@@ -9,14 +9,13 @@ import java.awt.geom.Arc2D;
 public class SidePanel extends JPanel {
 
     public static JButton inZoomButton, outZoomButton,tempButton, graphTypeButton;
-    public static JLabel temperatureLabel, graphTypeLabel;
+    public static JLabel temperatureLabel, graphTypeLabel, errorLabel;
 
     public boolean inCelcius = true;
     public boolean bContinuous = true;
 
-
     public SidePanel(){
-        setLayout(new GridLayout(1, 1, 30, 30));
+        setLayout(new GridLayout(1, 3, 30, 30));
 
         inZoomButton = new JButton("Zoom +");
         inZoomButton.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -36,6 +35,9 @@ public class SidePanel extends JPanel {
         graphTypeLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
         graphTypeButton.setFont(new Font("Dialog", Font.PLAIN, 20));
 
+        errorLabel = new JLabel("This is where the error goes");
+        errorLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
+
         JPanel zoomPanel = new JPanel();
         zoomPanel.add(inZoomButton);
         zoomPanel.add(outZoomButton);
@@ -48,11 +50,16 @@ public class SidePanel extends JPanel {
         graphPanel.add(graphTypeButton);
         graphPanel.add(graphTypeLabel);
 
+        JPanel errorPanel = new JPanel();
+        errorPanel.add(errorLabel);
+
         JPanel finalP = new JPanel();
         finalP.add(zoomPanel);
         finalP.add(tempPanel);
         finalP.add(graphPanel);
+        finalP.add(errorPanel);
 
         add(finalP);
+
     }
 }

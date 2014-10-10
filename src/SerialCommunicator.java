@@ -1,11 +1,8 @@
 
-
 import jssc.*;
 import java.util.Scanner;
 
 import java.net.SocketPermission;
-
-
 
 public class SerialCommunicator{
     //Declare Special Symbol Used in Serial Data Stream from Arduino
@@ -15,6 +12,12 @@ public class SerialCommunicator{
 
     private final static String LED_MODE_MSG = "0*";
     private final static String TEMP_MSG = "1*";
+
+
+    public static boolean switchOffError = false;
+    public static boolean thirdBoxError = false;
+    public static boolean unpluggedError = false;
+
 
     public SerialPort serialPort;
 

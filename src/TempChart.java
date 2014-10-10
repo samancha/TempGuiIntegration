@@ -16,7 +16,6 @@ import java.awt.*;
 
 public class TempChart extends JPanel{
 
-    //private static final Random randNum = new Random();
     private XYSeriesCollection dataCollection;
     private JFreeChart chart;
     ChartPanel chartPanel;
@@ -25,7 +24,7 @@ public class TempChart extends JPanel{
     private Double [] temperaturesArray = new Double[300];
 
     boolean mode60= true;
-    boolean modeError = false;
+    public static boolean modeError = false;
 
 
     public TempChart(){
@@ -71,39 +70,19 @@ public class TempChart extends JPanel{
     public void createDataSet(double newTempVal){    // add dataset as a parameter input
         xyData = new XYSeries("Graph Data");
 
-        // Todo: make if statement saying if 60
-
         for (int i = temperaturesArray.length - 1; i >= 0; i--) {
             if (i != 0) {
-
-                if(modeError && i ==1){
-                    temperaturesArray[i] =48.0;
-                    temperaturesArray[i-1] = 12.0;
-                    xyData.add(i, temperaturesArray[i]);
-                    xyData.add(i-1,temperaturesArray[i-1]);
-                }else if(!modeError){
                     temperaturesArray[i] = temperaturesArray[i - 1];
-                    xyData.add(i, temperaturesArray[i]);
-                }
-
+            }else if (i ==  0) {
+                if(modeError)
+                    temperaturesArray[i] = null;
+                else
+                    temperaturesArray[i] = newTempVal;
             }
-            else if (i ==  0) {
-                /*
-                if(modeError){
-                    temperaturesArray[i] = 48.0;
-                    temperaturesArray[i+1] = 12.0;
-                    xyData.add(i, temperaturesArray[i]);
-                    xyData.add(i+1,temperaturesArray[i+1]);
-
-                }*/
-                temperaturesArray[i] = newTempVal;
-                xyData.add(i, temperaturesArray[i]);
-            }
-
+            xyData.add(i, temperaturesArray[i]);
         }
 
         dataCollection = new XYSeriesCollection(xyData);
-
     }
 
     public void updateGraph(){
